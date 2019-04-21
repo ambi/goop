@@ -1,0 +1,22 @@
+{{ define "login" }}
+<html>
+<head>
+<title>GOOP</title>
+</head>
+<body>
+<form action="/login">
+  <div class="form-control">
+    <label for="login_id">Login ID: </label>
+    <input type="email" name="login_id" id="login_id" required>
+  </div>
+  <div class="form-control">
+    <label for="password">Password: </label>
+    <input type="password" name="password" id="password" required>
+  </div>
+  <div class="form-control">
+    <input type="submit" value="Next">
+  </div>
+</form>
+</body>
+</html>
+{{ end }}

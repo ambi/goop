@@ -1,0 +1,15 @@
+{{ define "authorize_error" }}
+<html>
+<head>
+<title>GOOP</title>
+</head>
+<body>
+<p>
+  <b>{{ .StatusCode }}</b>
+</p>
+<p>
+  <b>{{ .Error }}</b>
+</p>
+</body>
+</html>
+{{ end }}
