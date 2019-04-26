@@ -48,7 +48,7 @@ const (
 	// SubtypeIDToken はトークンの種類が ID トークンであることを表現する。
 	SubtypeIDToken = "id_token"
 
-	// TokenTYpeBearer はアクセストークンタイプが Bearer であることを表現する。
+	// TokenTypeBearer はアクセストークンタイプが Bearer であることを表現する。
 	TokenTypeBearer = "bearer"
 )
 
