@@ -14,7 +14,7 @@ func Serve() {
 		e.Logger.Fatal(err)
 	}
 
-	e.Renderer = NewTemplate("template/*.html")
+	e.Renderer = NewTemplate("resource/template/*")
 	SetupSession(e)
 	Route(e, dao)
 
