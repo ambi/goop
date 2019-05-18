@@ -1,11 +1,12 @@
 package infra
 
 import (
-	"github.com/ambi/goop/adapter/mysql"
-	"github.com/ambi/goop/domain/db"
+	"database/sql"
+
+	_ "github.com/go-sql-driver/mysql" // MySQL
 )
 
-// ConnectRDB は RDB に接続する。
-func ConnectRDB() (db.DAO, error) {
-	return mysql.NewDAO("root@tcp/goop?parseTime=true")
+// OpenRDB creates a new RDB client.
+func OpenRDB() (*sql.DB, error) {
+	return sql.Open("mysql", "root@tcp/goop?parseTime=true")
 }

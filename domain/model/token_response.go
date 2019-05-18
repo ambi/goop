@@ -2,7 +2,7 @@ package model
 
 import "encoding/json"
 
-// TokenResponse は Token Endpoint の成功レスポンスを抽象化した型。
+// TokenResponse is a type for responses of the OAuth 2.0 token endpoint.
 type TokenResponse struct {
 	AccessToken *AccessToken
 	IDToken     *IDToken
@@ -10,7 +10,7 @@ type TokenResponse struct {
 	ExpiresIn   int
 }
 
-// MarshalJSON は Token Response を JSON 形式に変換する。
+// MarshalJSON converts a TokenResponse to JSON.
 func (res *TokenResponse) MarshalJSON() ([]byte, error) {
 	obj := map[string]interface{}{
 		"access_token": res.AccessToken.String(),

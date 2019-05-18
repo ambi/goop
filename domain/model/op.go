@@ -13,7 +13,7 @@ import (
 	"gopkg.in/square/go-jose.v2"
 )
 
-// OP は OpenID Provider の型。
+// OP is an OpenID Provider type.
 type OP struct {
 	Issuer                           string   `json:"issuer"`
 	AuthorizationEndpoint            string   `json:"authorization_endpoint"`
@@ -32,7 +32,7 @@ type OP struct {
 	JWTSigner   jose.Signer        `json:"-"`
 }
 
-// NewSimpleOP はシンプルな OP を生成する。
+// NewSimpleOP creates a simple OP.
 func NewSimpleOP(issuer string, privateJWKS jose.JSONWebKeySet) *OP {
 	url, err := url.Parse(issuer)
 	if err != nil {
@@ -82,7 +82,7 @@ func NewSimpleOP(issuer string, privateJWKS jose.JSONWebKeySet) *OP {
 	return op
 }
 
-// NewJSONWebKeySetFromPEMs は PEM の配列から JWK Set を生成して返す。
+// NewJSONWebKeySetFromPEMs creates a JWK Set from a slice of PEMs.
 func NewJSONWebKeySetFromPEMs(pems []string) jose.JSONWebKeySet {
 	const (
 		keyAlg = string(jose.RS256)

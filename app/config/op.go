@@ -4,7 +4,7 @@ import (
 	"github.com/ambi/goop/domain/model"
 )
 
-// SingleOP は唯一の OP。TODO: initialize.
+// SingleOP is the single OP. TODO: initialize.
 var SingleOP *model.OP
 
 func init() {

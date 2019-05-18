@@ -9,7 +9,7 @@ import (
 	"gopkg.in/square/go-jose.v2/jwt"
 )
 
-// IDToken は ID トークン型。
+// IDToken is a type for OIDC ID tokens.
 type IDToken struct {
 	jwt.Claims
 	Subtype  string           `json:"subtype,omitempty"`
@@ -19,7 +19,7 @@ type IDToken struct {
 	OP *OP `json:"-"`
 }
 
-// NewIDToken は新しい ID トークンを生成する。
+// NewIDToken creates an ID token.
 func NewIDToken(now time.Time, op *OP, clientID string, user *User, expiresIn int, nonce string) *IDToken {
 	expiry := now.Add(time.Duration(expiresIn) * time.Second)
 
@@ -42,7 +42,7 @@ func NewIDToken(now time.Time, op *OP, clientID string, user *User, expiresIn in
 	return idToken
 }
 
-// String は ID トークンの文字列表現を返す。
+// String returns string representation of the ID token.
 func (t *IDToken) String() string {
 	raw, err := jwt.Signed(t.OP.JWTSigner).Claims(t).CompactSerialize()
 	if err != nil {

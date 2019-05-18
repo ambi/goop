@@ -9,15 +9,16 @@ import (
 	"gopkg.in/square/go-jose.v2/jwt"
 )
 
-// AccessToken はアクセストークンの型。
+// AccessToken is a type for access tokens.
 type AccessToken struct {
 	jwt.Claims
 	Subtype string   `json:"subtype,omitempty"`
 	Scopes  []string `json:"scopes,omitempty"`
 	OP      *OP      `json:"-"`
+	User    *User    `json:"-"`
 }
 
-// NewAccessToken は新しいアクセストークンを生成する。
+// NewAccessToken creates a new access token.
 func NewAccessToken(now time.Time, op *OP, resourceID string, user *User, expiresIn int) *AccessToken {
 	expiry := now.Add(time.Duration(expiresIn) * time.Second)
 
@@ -33,17 +34,18 @@ func NewAccessToken(now time.Time, op *OP, resourceID string, user *User, expire
 		},
 		Subtype: oidc.SubtypeAccessToken,
 		OP:      op,
+		User:    user,
 	}
 
 	return accessToken
 }
 
-// TokenType はアクセストークンタイプ (bearer, mac, ...) を返す。
+// TokenType returns the type of the access token.
 func (t *AccessToken) TokenType() string {
 	return oidc.TokenTypeBearer
 }
 
-// String は アクセストークンの文字列表現を返す。
+// String returns string representation for the access token.
 func (t *AccessToken) String() string {
 	raw, err := jwt.Signed(t.OP.JWTSigner).Claims(t).CompactSerialize()
 	if err != nil {

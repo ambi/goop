@@ -9,18 +9,19 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// Token は Token Endpoint 用のコントローラ。
+// Token is a controller for the OAuth 2.0 token endpoint.
 type Token struct {
 	uc *usecase.Token
 }
 
-// NewToken は Token コントローラを生成する。
-func NewToken(dao db.DAO) *Token {
-	return &Token{usecase.NewToken(dao)}
+// NewToken creates a Token controller.
+func NewToken(repo db.Repository) *Token {
+	return &Token{usecase.NewToken(repo)}
 }
 
-// Post は Token Endpoint へのリクエストを受け付けて、実処理をユースケースに任せる。
+// Post receives a request to the token endpoint, and call the use case object.
 func (t *Token) Post(c echo.Context) error {
+	// No CSRF token.
 	// TODO: Parse Authorization Header
 	clientID := c.FormValue("client_id")
 	clientSecret := c.FormValue("client_secret")

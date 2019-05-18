@@ -1,6 +1,6 @@
 package model
 
-// AuthorizationCode は OIDC 認可コードを表した型。
+// AuthorizationCode is a type for OIDC authorization codes.
 type AuthorizationCode struct {
 	UUID  string
 	Code  string

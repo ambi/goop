@@ -7,19 +7,19 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// Template は html/template を使ったテンプレート型。
+// Template is a type for html/template.
 type Template struct {
 	templates *template.Template
 }
 
-// NewTemplate は glob のファイル群を使って新しい Template を生成する。
+// NewTemplate creates a new Template using globbed files.
 func NewTemplate(glob string) *Template {
 	return &Template{
 		templates: template.Must(template.ParseGlob(glob)),
 	}
 }
 
-// Render はテンプレートの処理を行う。
+// Render processes template rendering.
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
 	return t.templates.ExecuteTemplate(w, name, data)
 }

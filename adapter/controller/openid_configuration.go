@@ -8,15 +8,15 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// OpenIDConfiguration は OP Configuration Endpoint 用のコントローラ。
+// OpenIDConfiguration is a controller for the OP configuration endpoint.
 type OpenIDConfiguration struct{}
 
-// NewOpenIDConfiguration は OpenIDConfiguration コントローラを生成する。
-func NewOpenIDConfiguration(_ db.DAO) *OpenIDConfiguration {
+// NewOpenIDConfiguration creates an OpenIDConfiguration controller.
+func NewOpenIDConfiguration(_ db.Repository) *OpenIDConfiguration {
 	return &OpenIDConfiguration{}
 }
 
-// Get は OP Configuration Endpoint へのリクエストを受け取って、OP Configuration Metdata JSON を返す。
+// Get receives a GET request to the OP configuration endpoint, and returns the OP configuration metadata.
 func (oc *OpenIDConfiguration) Get(c echo.Context) error {
 	return c.JSON(http.StatusOK, config.SingleOP)
 }

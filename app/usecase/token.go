@@ -9,22 +9,22 @@ import (
 	"github.com/ambi/goop/domain/model"
 )
 
-// Token はトークン生成処理のユースケース。
+// Token is a use case for token issuarance.
 type Token struct {
-	dao db.DAO
+	repo db.Repository
 }
 
-// NewToken は Token ユースケースを生成する。
-func NewToken(dao db.DAO) *Token {
-	return &Token{dao}
+// NewToken creates a Token use case.
+func NewToken(repo db.Repository) *Token {
+	return &Token{repo}
 }
 
-// Call はトークン生成処理を行って、トークンまたはエラーを返す。
-func (uc *Token) Call(params *model.TokenParams) (*model.TokenResponse, *model.TokenError) {
+// Call processes token issuarance and returns a token or error.
+func (uc *Token) Call(params *model.TokenParams) (*model.TokenResponse, *model.ClientError) {
 	ctx := context.Background()
 
-	client, _ := uc.dao.GetClient(ctx, params.ClientID)
-	authzCode, _ := uc.dao.GetAuthorizationCode(ctx, params.Code)
+	client, _ := uc.repo.GetClient(ctx, params.ClientID)
+	authzCode, _ := uc.repo.GetAuthorizationCode(ctx, params.Code)
 
 	err := params.Valid(client, authzCode)
 	if err != nil {

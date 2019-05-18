@@ -3,56 +3,56 @@ package oidc
 import "gopkg.in/square/go-jose.v2"
 
 const (
-	// ClaimSub は sub クレームを表現する。
+	// ClaimSub represents sub claim.
 	ClaimSub = "sub"
-	// ClaimIss は iss クレームを表現する。
+	// ClaimIss represents iss claim.
 	ClaimIss = "iss"
-	// ClaimAud は aud クレームを表現する。
+	// ClaimAud represents aud claim.
 	ClaimAud = "aud"
-	// ClaimExp は exp クレームを表現する。
+	// ClaimExp represents exp claim.
 	ClaimExp = "exp"
-	// ClaimIat は iat クレームを表現する。
+	// ClaimIat represents iat claim.
 	ClaimIat = "iat"
 
-	// GrantTypeAuthorizationCode は認可コードグラント grant_type=authorization_code を表現する。
+	// GrantTypeAuthorizationCode represents grant_type=authorization_code.
 	GrantTypeAuthorizationCode = "authorization_code"
-	// GrantTypeImplicit はインプリシットグラント grant_type=implicit を表現する。
+	// GrantTypeImplicit represents grant_type=implicit.
 	GrantTypeImplicit = "implicit"
 
-	// ResponseModeQuery は response_type=query (?state=...) を表現する。
+	// ResponseModeQuery represents response_type=query (?state=...).
 	ResponseModeQuery = "query"
-	// ResponseModeFragment は response_type=fragment (#state=...) を表現する。
+	// ResponseModeFragment represents response_type=fragment (#state=...).
 	ResponseModeFragment = "fragment"
-	// ResponseModeFormPost は response_type=form_post (<form>...</form>) を表現する。
+	// ResponseModeFormPost represents response_type=form_post (<form>...</form>).
 	ResponseModeFormPost = "form_post"
 
-	// ResponseTypeCode は Authorization Code Flow の response_type=code を表現する。
+	// ResponseTypeCode represents response_type=code.
 	ResponseTypeCode = "code"
-	// ResponseTypeToken は Implicit Flow の response_type=token を表現する。
+	// ResponseTypeToken represents response_type=token.
 	ResponseTypeToken = "token"
-	// ResponseTypeIDToken は Implicit Flow の response_type=id_token を表現する。
+	// ResponseTypeIDToken represents response_type=id_token.
 	ResponseTypeIDToken = "id_token"
 
-	// ScopeOpenID は openid スコープを表現する。
+	// ScopeOpenID represents openid scope.
 	ScopeOpenID = "openid"
-	// ScopeProfile は profile スコープを表現する。
+	// ScopeProfile represents profile scope.
 	ScopeProfile = "profile"
 
-	// SubjectTypePairwise は subject_type=pairwise を表現する。
+	// SubjectTypePairwise represents subject_type=pairwise.
 	SubjectTypePairwise = "pairwise"
-	// SubjectTypePublic は subject_type=Public を表現する。
+	// SubjectTypePublic represents subject_type=Public.
 	SubjectTypePublic = "public"
 
-	// SubtypeAccessToken はトークンの種類がアクセストークンであることを表現する。
+	// SubtypeAccessToken represents an access token.
 	SubtypeAccessToken = "access_token"
-	// SubtypeIDToken はトークンの種類が ID トークンであることを表現する。
+	// SubtypeIDToken represents an ID token.
 	SubtypeIDToken = "id_token"
 
-	// TokenTypeBearer はアクセストークンタイプが Bearer であることを表現する。
+	// TokenTypeBearer represents a bearer token.
 	TokenTypeBearer = "bearer"
 )
 
-// ClaimsSupported はサポートするクレームのスライス。
+// ClaimsSupported is a slice of supported claims.
 var ClaimsSupported = []string{
 	ClaimIss,
 	ClaimSub,
@@ -61,38 +61,38 @@ var ClaimsSupported = []string{
 	ClaimIat,
 }
 
-// GrantTypesSupported はサポートする grant_type のスライス。
+// GrantTypesSupported is a slice of supported grant types.
 var GrantTypesSupported = []string{
 	GrantTypeAuthorizationCode,
 	GrantTypeImplicit,
 }
 
-// IDTokenSigningAlgValuesSupported はサポートする ID トークン署名アルゴリズムのスライス。
+// IDTokenSigningAlgValuesSupported is a slice of supported ID token signing algorithms.
 var IDTokenSigningAlgValuesSupported = []string{
 	string(jose.RS256),
 }
 
-// ResponseModesSupported はサポートする response_mode のスライス。
+// ResponseModesSupported is a slice of supported response modes.
 var ResponseModesSupported = []string{
 	ResponseModeQuery,
 	ResponseModeFragment,
 	ResponseModeFormPost,
 }
 
-// ResponseTypesSupported はサポートする response_type のスライス。
+// ResponseTypesSupported is a slice of supported response types.
 var ResponseTypesSupported = []string{
 	ResponseTypeCode,
 	ResponseTypeToken,
 	ResponseTypeIDToken,
 }
 
-// ScopesSupported はサポートする scope のスライス。
+// ScopesSupported is a slice of supported scopes.
 var ScopesSupported = []string{
 	ScopeOpenID,
 	ScopeProfile,
 }
 
-// SubjectTypesSupported はサポートする subject_type のスライス。
+// SubjectTypesSupported is a slice of supported subject types.
 var SubjectTypesSupported = []string{
 	SubjectTypePublic,
 }

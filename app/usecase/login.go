@@ -6,17 +6,17 @@ import (
 	"github.com/gorilla/sessions"
 )
 
-// Login はログイン処理のユースケース。
+// Login is a use case for login.
 type Login struct {
-	dao db.DAO
+	repo db.Repository
 }
 
-// NewLogin は Login ユースケースを生成する。
-func NewLogin(dao db.DAO) *Login {
-	return &Login{dao}
+// NewLogin creates a Login use case.
+func NewLogin(repo db.Repository) *Login {
+	return &Login{repo}
 }
 
-// Call はログイン処理を行う。
+// Call processes a login.
 func (uc *Login) Call(sess *sessions.Session, loginID, password string) (*model.User, error) {
 	// TODO
 	if loginID != "test1@example.com" || password != "hogehoge" {

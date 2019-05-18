@@ -2,7 +2,7 @@ package model
 
 import "net/url"
 
-// AuthorizeError は認可エラーの型。
+// AuthorizeError is a type for authorization errors.
 type AuthorizeError struct {
 	StatusCode int
 	Message    string
@@ -13,7 +13,7 @@ func (err *AuthorizeError) Error() string {
 	return err.Message
 }
 
-// ToQuery はエラーを URL クエリ文字列に変換する。
+// ToQuery converts an error to a URL query string.
 func (err *AuthorizeError) ToQuery() string {
 	values := url.Values{}
 	values.Add("error", err.Message)

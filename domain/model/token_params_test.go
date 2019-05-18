@@ -15,15 +15,15 @@ func TestTokenParams_Valid(t *testing.T) {
 		params    TokenParams
 		client    *Client
 		authzCode *AuthorizationCode
-		want      *TokenError
+		want      *ClientError
 	}{
 		{TokenParams{"authorization_code", authzCode.Code, redirectURI, client.ClientID, client.ClientSecret}, client, authzCode, nil},
-		{TokenParams{"authorization_code", authzCode.Code, redirectURI, "invalid", client.ClientSecret}, nil, authzCode, &TokenError{StatusCode: http.StatusBadRequest, Message: "invalid_client"}},
-		{TokenParams{"authorization_code", authzCode.Code, redirectURI, client.ClientID, "invalid"}, client, authzCode, &TokenError{StatusCode: http.StatusBadRequest, Message: "invalid_client"}},
-		{TokenParams{"authorization_code", authzCode.Code, "invalid", client.ClientID, client.ClientSecret}, client, authzCode, &TokenError{StatusCode: http.StatusBadRequest, Message: "invalid_request"}},
-		{TokenParams{"", authzCode.Code, redirectURI, client.ClientID, client.ClientSecret}, client, authzCode, &TokenError{StatusCode: http.StatusBadRequest, Message: "invalid_request"}},
-		{TokenParams{"invalid", authzCode.Code, redirectURI, client.ClientID, client.ClientSecret}, client, authzCode, &TokenError{StatusCode: http.StatusBadRequest, Message: "unsupported_grant_type"}},
-		{TokenParams{"authorization_code", "invalid", redirectURI, client.ClientID, client.ClientSecret}, client, nil, &TokenError{StatusCode: http.StatusBadRequest, Message: "invalid_grant"}},
+		{TokenParams{"authorization_code", authzCode.Code, redirectURI, "invalid", client.ClientSecret}, nil, authzCode, &ClientError{StatusCode: http.StatusBadRequest, Message: "invalid_client"}},
+		{TokenParams{"authorization_code", authzCode.Code, redirectURI, client.ClientID, "invalid"}, client, authzCode, &ClientError{StatusCode: http.StatusBadRequest, Message: "invalid_client"}},
+		{TokenParams{"authorization_code", authzCode.Code, "invalid", client.ClientID, client.ClientSecret}, client, authzCode, &ClientError{StatusCode: http.StatusBadRequest, Message: "invalid_request"}},
+		{TokenParams{"", authzCode.Code, redirectURI, client.ClientID, client.ClientSecret}, client, authzCode, &ClientError{StatusCode: http.StatusBadRequest, Message: "invalid_request"}},
+		{TokenParams{"invalid", authzCode.Code, redirectURI, client.ClientID, client.ClientSecret}, client, authzCode, &ClientError{StatusCode: http.StatusBadRequest, Message: "unsupported_grant_type"}},
+		{TokenParams{"authorization_code", "invalid", redirectURI, client.ClientID, client.ClientSecret}, client, nil, &ClientError{StatusCode: http.StatusBadRequest, Message: "invalid_grant"}},
 	}
 	for _, tc := range testCases {
 		got := tc.params.Valid(tc.client, tc.authzCode)

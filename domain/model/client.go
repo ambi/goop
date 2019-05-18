@@ -1,6 +1,6 @@
 package model
 
-// Client は OIDC Client を表した型。
+// Client is a type for OAuth 2.0 clients.
 type Client struct {
 	UUID         string
 	ClientID     string
@@ -9,7 +9,7 @@ type Client struct {
 	RedirectURIs []string
 }
 
-// IsValidRedirectURI は登録ずみのリダイレクト URI かどうかを返す。
+// IsValidRedirectURI validates a redirect URI.
 func (c *Client) IsValidRedirectURI(redirectURI string) bool {
 	for _, uri := range c.RedirectURIs {
 		if uri == redirectURI {

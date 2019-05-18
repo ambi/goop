@@ -9,21 +9,21 @@ import (
 	"github.com/labstack/gommon/log"
 )
 
-// Authorize は認可処理のユースケース。
+// Authorize is a use case for authorization.
 type Authorize struct {
-	dao db.DAO
+	repo db.Repository
 }
 
-// NewAuthorize は Authorize ユースケースを生成する。
-func NewAuthorize(dao db.DAO) *Authorize {
-	return &Authorize{dao}
+// NewAuthorize creates an Authorize use case.
+func NewAuthorize(repo db.Repository) *Authorize {
+	return &Authorize{repo}
 }
 
-// Call は認可処理を行って、認可コードまたはエラーを返す。
+// Call processes authorization and returns an authorization code or error.
 func (uc *Authorize) Call(params *model.AuthorizeParams, loginID string) (authzResponse *model.AuthorizeResponse, authzErr *model.AuthorizeError, loginRequired bool) {
 	ctx := context.Background()
 
-	client, getErr := uc.dao.GetClient(ctx, params.ClientID)
+	client, getErr := uc.repo.GetClient(ctx, params.ClientID)
 	if getErr != nil {
 		log.Error(getErr)
 	}
@@ -37,13 +37,13 @@ func (uc *Authorize) Call(params *model.AuthorizeParams, loginID string) (authzR
 		loginRequired = true
 		return
 	}
-	user, getErr := uc.dao.GetUser(ctx, loginID)
+	user, getErr := uc.repo.GetUser(ctx, loginID)
 	if getErr != nil {
 		log.Error(getErr)
 		loginRequired = true
 		return
 	}
-	authzCode, createErr := uc.dao.CreateAuthorizationCode(ctx, user)
+	authzCode, createErr := uc.repo.CreateAuthorizationCode(ctx, user)
 	if createErr != nil {
 		log.Error(createErr)
 		authzErr = &model.AuthorizeError{

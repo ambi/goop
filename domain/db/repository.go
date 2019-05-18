@@ -3,12 +3,13 @@ package db
 import (
 	"context"
 	"errors"
+	"time"
 
 	"github.com/ambi/goop/domain/model"
 )
 
-// DAO は DAO インタフェース。
-type DAO interface {
+// Repository is a repository for all data in DB.
+type Repository interface {
 	Close() error
 
 	CreateAuthorizationCode(ctx context.Context, user *model.User) (*model.AuthorizationCode, error)
@@ -19,12 +20,15 @@ type DAO interface {
 
 	CreateUser(ctx context.Context, loginID string) (*model.User, error)
 	GetUser(ctx context.Context, loginID string) (*model.User, error)
+
+	CreateRevocation(ctx context.Context, token string, expiresAt time.Time) error
+	GetRevocation(ctx context.Context, token string) (bool, error)
 }
 
 var (
-	// ErrNotFound はデータが見つからなかったときのエラー。
-	ErrNotFound = errors.New("repository.ErrNotFound")
+	// ErrNotFound is an error when data cannot be found.
+	ErrNotFound = errors.New("db.ErrNotFound")
 
-	// ErrNotSaved はデータが保存できなかったときのエラー。
-	ErrNotSaved = errors.New("repository.ErrNotSaved")
+	// ErrNotSaved is an error when data cannot be saved.
+	ErrNotSaved = errors.New("db.ErrNotSaved")
 )

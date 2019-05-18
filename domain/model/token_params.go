@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-// TokenParams は Token Endpoint のパラメータをまとめた型。
+// TokenParams is a type for parameters for the OAuth 2.0 token endpoint.
 type TokenParams struct {
 	GrantType    string
 	Code         string
@@ -13,10 +13,10 @@ type TokenParams struct {
 	ClientSecret string
 }
 
-// Valid は TokenParams のバリデーションを行う。
-func (params *TokenParams) Valid(client *Client, authzCode *AuthorizationCode) *TokenError {
+// Valid validates a TokenParams.
+func (params *TokenParams) Valid(client *Client, authzCode *AuthorizationCode) *ClientError {
 	if client == nil {
-		err := &TokenError{
+		err := &ClientError{
 			StatusCode: http.StatusBadRequest,
 			Message:    "invalid_client",
 		}
@@ -24,7 +24,7 @@ func (params *TokenParams) Valid(client *Client, authzCode *AuthorizationCode) *
 	}
 
 	if client.ClientSecret != params.ClientSecret {
-		err := &TokenError{
+		err := &ClientError{
 			StatusCode: http.StatusBadRequest,
 			Message:    "invalid_client",
 		}
@@ -32,7 +32,7 @@ func (params *TokenParams) Valid(client *Client, authzCode *AuthorizationCode) *
 	}
 
 	if !client.IsValidRedirectURI(params.RedirectURI) {
-		err := &TokenError{
+		err := &ClientError{
 			StatusCode: http.StatusBadRequest,
 			Message:    "invalid_request",
 		}
@@ -40,14 +40,14 @@ func (params *TokenParams) Valid(client *Client, authzCode *AuthorizationCode) *
 	}
 
 	if params.GrantType == "" {
-		err := &TokenError{
+		err := &ClientError{
 			StatusCode: http.StatusBadRequest,
 			Message:    "invalid_request",
 		}
 		return err
 	}
 	if params.GrantType != "authorization_code" {
-		err := &TokenError{
+		err := &ClientError{
 			StatusCode: http.StatusBadRequest,
 			Message:    "unsupported_grant_type",
 		}
@@ -55,7 +55,7 @@ func (params *TokenParams) Valid(client *Client, authzCode *AuthorizationCode) *
 	}
 
 	if authzCode == nil {
-		err := &TokenError{
+		err := &ClientError{
 			StatusCode: http.StatusBadRequest,
 			Message:    "invalid_grant",
 		}

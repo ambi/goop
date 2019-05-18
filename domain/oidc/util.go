@@ -1,6 +1,6 @@
 package oidc
 
-// IsSupportedResponseMode は responseMode という名前の Response Mode をサポートしているかどうかを返す。
+// IsSupportedResponseMode returns whether a response type is supported or not.
 func IsSupportedResponseMode(responseMode string) bool {
 	for _, supportedResponseMode := range ResponseModesSupported {
 		if responseMode == supportedResponseMode {
@@ -10,7 +10,7 @@ func IsSupportedResponseMode(responseMode string) bool {
 	return false
 }
 
-// IsSupportedResponseType は responseType という名前の Response Type をサポートしているかどうかを返す。
+// IsSupportedResponseType returns whether a response type is supported or not.
 func IsSupportedResponseType(responseType string) bool {
 	for _, supportedResponseType := range ResponseTypesSupported {
 		if responseType == supportedResponseType {
@@ -20,7 +20,7 @@ func IsSupportedResponseType(responseType string) bool {
 	return false
 }
 
-// IsSupportedScope は scope という名前のスコープをサポートしているかどうかを返す。
+// IsSupportedScope returns whether a scope is supported or not.
 func IsSupportedScope(scope string) bool {
 	for _, supportedScope := range ScopesSupported {
 		if scope == supportedScope {

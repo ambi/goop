@@ -8,23 +8,24 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// Login はログインエンドポイント用のコントローラ。
+// Login is a controller for the login endpoint.
 type Login struct {
 	uc *usecase.Login
 }
 
-// NewLogin は Login コントローラを生成する。
-func NewLogin(dao db.DAO) *Login {
-	return &Login{usecase.NewLogin(dao)}
+// NewLogin creates a Login controller.
+func NewLogin(repo db.Repository) *Login {
+	return &Login{usecase.NewLogin(repo)}
 }
 
-// Get はログインエンドポイントへのリクエストを受け付けて、ログイン画面を表示する。
+// Get receives a GET request to the login endpoint, and show the login page.
 func (l *Login) Get(c echo.Context) error {
 	return c.Render(http.StatusOK, "login", struct{}{})
 }
 
-// Post はログインエンドポイントへのリクエストを受け付けて、認証処理をユースケースに任せる。
+// Post receives a POST request to the login endpoint, and call the use case object.
 func (l *Login) Post(c echo.Context) error {
+	// TODO: check CSRF token.
 	loginID := c.FormValue("login_id")
 	password := c.FormValue("password")
 	sess := GetSession(c)

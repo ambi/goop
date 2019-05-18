@@ -4,16 +4,17 @@ import (
 	"github.com/ambi/goop/domain/db"
 )
 
-// Consent は同意処理のユースケース。
+// Consent is an use case for consent.
 type Consent struct {
-	dao db.DAO
+	repo db.Repository
 }
 
-// NewConsent は Consent ユースケースを生成する。
-func NewConsent(dao db.DAO) *Consent {
-	return &Consent{dao}
+// NewConsent creates a Consent use case.
+func NewConsent(repo db.Repository) *Consent {
+	return &Consent{repo}
 }
 
-// Call は同意処理を行う。
+// Call processes consent.
 func (uc *Consent) Call() {
+	// TODO
 }

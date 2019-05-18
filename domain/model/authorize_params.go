@@ -7,7 +7,7 @@ import (
 	"github.com/ambi/goop/domain/oidc"
 )
 
-// AuthorizeParams は Authorization Endpoint のパラメータをひとまとめにした型。
+// AuthorizeParams is a type for parameters of the OAuth 2.0 authorization endpoint.
 type AuthorizeParams struct {
 	Scope        string
 	ResponseType string
@@ -18,7 +18,7 @@ type AuthorizeParams struct {
 	Nonce        string
 }
 
-// Valid は AuthorizeParams のバリデーションを行う。
+// Valid validates AuthorizeParams.
 func (params *AuthorizeParams) Valid(client *Client) *AuthorizeError {
 	if client == nil {
 		err := &AuthorizeError{
@@ -77,12 +77,12 @@ func (params *AuthorizeParams) Valid(client *Client) *AuthorizeError {
 	return nil
 }
 
-// ResponseTypes は response_type を配列にして返す。
+// ResponseTypes returns a slice of response types.
 func (params *AuthorizeParams) ResponseTypes() []string {
 	return strings.Split(params.ResponseType, " ")
 }
 
-// Scopes は scope を配列にして返す。
+// Scopes returns a slice of scopes.
 func (params *AuthorizeParams) Scopes() []string {
 	return strings.Split(params.Scope, " ")
 }

@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// SetupSession はセッションのセットアップをする。
+// SetupSession sets up the session store.
 func SetupSession(e *echo.Echo) {
 	store := sessions.NewCookieStore([]byte("secret")) // TODO
 	e.Use(session.Middleware(store))

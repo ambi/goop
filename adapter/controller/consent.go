@@ -8,23 +8,24 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// Consent は同意エンドポイント用のコントローラ。
+// Consent is a controller for the OIDC consent endpoint.
 type Consent struct {
 	uc *usecase.Consent
 }
 
-// NewConsent は Consent コントローラを生成する。
-func NewConsent(dao db.DAO) *Consent {
-	return &Consent{usecase.NewConsent(dao)}
+// NewConsent creates a Consent controller.
+func NewConsent(repo db.Repository) *Consent {
+	return &Consent{usecase.NewConsent(repo)}
 }
 
-// Get は同意エンドポイントへのリクエストを受け付けて、同意画面を表示する。
+// Get receives a GET request to the consent endpoint, and show the consent page.
 func (l *Consent) Get(c echo.Context) error {
 	return c.Render(http.StatusOK, "consent", struct{}{})
 }
 
-// Post は同意エンドポイントへのリクエストを受け付けて、認証処理をユースケースに任せる。
+// Post receives a POST request to the consent endpoint, and call the use case object.
 func (l *Consent) Post(c echo.Context) error {
+	// TODO: check CSRF token.
 	// TODO
 	return nil
 }

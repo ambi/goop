@@ -9,17 +9,17 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// Authorize は Authorization Endpoint 用のコントローラ。
+// Authorize is a controller for the OAuth 2.0 authorization endpoint.
 type Authorize struct {
 	uc *usecase.Authorize
 }
 
-// NewAuthorize は Authorize コントローラを生成する。
-func NewAuthorize(dao db.DAO) *Authorize {
-	return &Authorize{usecase.NewAuthorize(dao)}
+// NewAuthorize creates a new Authorize controller.
+func NewAuthorize(repo db.Repository) *Authorize {
+	return &Authorize{usecase.NewAuthorize(repo)}
 }
 
-// Get は Authorization Endpoint へのリクエストを受け取って、実処理をユースケースに任せる。
+// Get receive a GET request to the authorization endpoint, and call the use case object.
 func (a *Authorize) Get(c echo.Context) error {
 	sess := GetSession(c)
 	loginID, _ := sess.Values["login_id"].(string)
@@ -37,8 +37,9 @@ func (a *Authorize) Get(c echo.Context) error {
 	return a.callUsecase(c, params, loginID)
 }
 
-// Post は Authorization Endpoint へのリクエストを受け取って、実処理をユースケースに任せる。
+// Post receive a POST request to the authorization endpoint, and call the use case object.
 func (a *Authorize) Post(c echo.Context) error {
+	// No CSRF token.
 	sess := GetSession(c)
 	loginID, _ := sess.Values["login_id"].(string)
 

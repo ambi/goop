@@ -8,15 +8,15 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// JWKS は JWK Set Endpoint 用のコントローラ。
+// JWKS is a controller for the OIDC JWK Set endpoint.
 type JWKS struct{}
 
-// NewJWKS は JWKS コントローラを生成する。
-func NewJWKS(_ db.DAO) *JWKS {
+// NewJWKS creates a controller for JWKS.
+func NewJWKS(_ db.Repository) *JWKS {
 	return &JWKS{}
 }
 
-// Get は JWKS へのリクエストを受け取って、JWK Set を返す。
+// Get receives a GET request to the JWKS endpoint, and returns the JWK Set.
 func (j *JWKS) Get(c echo.Context) error {
 	return c.JSON(http.StatusOK, config.SingleOP.PublicJWKS)
 }

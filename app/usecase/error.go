@@ -3,6 +3,6 @@ package usecase
 import "errors"
 
 var (
-	// ErrUserUnauthenticated はユーザ認証に失敗したときのエラー。
+	// ErrUserUnauthenticated is an error when a user cannot be authenticated.
 	ErrUserUnauthenticated = errors.New("usecase.ErrUserUnauthenticated")
 )

@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-// Config は設定情報を保持している。
+// Config is a type for configuration.
 var Config struct {
 	Server struct {
 		URL       string

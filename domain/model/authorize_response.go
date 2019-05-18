@@ -2,13 +2,13 @@ package model
 
 import "net/url"
 
-// AuthorizeResponse は Token Endpoint のレスポンスを抽象化した型。
+// AuthorizeResponse is a type for responses of the token endpoint.
 type AuthorizeResponse struct {
 	Code  string
 	State string
 }
 
-// ToQuery は AuthorizeResponse を URL クエリ文字列に変換する。
+// ToQuery converts an AuthorizeResponse to a URL query string.
 func (resp *AuthorizeResponse) ToQuery() string {
 	values := url.Values{}
 	values.Add("code", resp.Code)

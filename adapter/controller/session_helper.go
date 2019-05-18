@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// GetSession はセッション情報を取得する。
+// GetSession gets session data.
 func GetSession(c echo.Context) *sessions.Session {
 	sess, err := session.Get("session", c) // TODO
 	if err != nil {
@@ -16,7 +16,7 @@ func GetSession(c echo.Context) *sessions.Session {
 	return sess
 }
 
-// SaveSession はセッション情報を保存する。
+// SaveSession saves session data.
 func SaveSession(c echo.Context, sess *sessions.Session) {
 	if sess == nil {
 		return

@@ -1,6 +1,6 @@
 package model
 
-// User はユーザ型。
+// User is a type for users.
 type User struct {
 	UUID    string
 	LoginID string
